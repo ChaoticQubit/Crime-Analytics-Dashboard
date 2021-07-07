@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Crime Analysis Software</title>
+</head>
+<body>
+    <center class="login_center">
+        <h1>Login to your dashboard</h1>
+
+        {% if status == 0 %}
+            <h4 style="color: red;">Error Logging In!!</h4>
+        {% endif %}
+        <form action="/" method="post">
+            <div class="content">
+                <input type="text" name="username" id="username" placeholder="Enter your username">
+                <br>
+                <input type="password" name="pass" id="pass" placeholder="Enter your password">
+                <br>
+                <input type="submit" value="Login" id="subm">
+            </div>
+        </form>
+
+        <h2>Total Tuple Count: {{ total_cnt }}</h2>
+    </center>
+</body>
+</html>

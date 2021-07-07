@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Police Dashboard</title>
+{% endblock %}
+
+{% block type %}
+    <h2 class="page-title">Police Dashboard</h2>
+{% endblock %}
+
+<!---FILTERS START--->
+
+{% block ctypeFilt %}
+<select name="ctype" id="ctype" onchange="value_set()">
+    <option value="0">--Select a Crime Type--</option>
+    {% for ctype in ctype_filter %}
+        <option value="{{ ctype[0].lower() }}">{{ ctype[0] }}</option>
+    {% endfor %}
+</select>
+{% endblock %}
+
+{% block cSubtypeFilt %}
+<select name="csubtype" id="csubtype" onchange="value_set_crime_subtype()">
+    <option value="0">--Select a Crime Sub Type--</option>
+    {% for cSubtype in cSubtype_filter %}
+        <option value="{{ cSubtype[0].lower() }}">{{ cSubtype[0] }}</option>
+    {% endfor %}
+</select>
+{% endblock %}
+
+{% block districtFilt %}
+<select name="distfilt" id="distfilt" onchange="value_set_dist()">
+    <option value="0">--Select a District--</option>
+    {% for dist in dist_filter %}
+        <option value="{{ dist[0].lower() }}">{{ dist[0] }}</option>
+    {% endfor %}
+</select>
+{% endblock %}
+
+{% block crimeLoc %}
+<select name="crimeLoc" id="crimeLoc" onchange="value_set_location()">
+    <option value="0">--Select Crime Location--</option>
+    {% for loc in crimeLoc_filt %}
+        <option value="{{ loc[0].lower() }}">{{ loc[0] }}</option>
+    {% endfor %}
+</select>
+{% endblock %}
+
+{% block dateSlider %}
+    <center>
+        <p><input type="text" id="amount" style="border: 0; color: #f6931f; font-weight: bold;" size="30" /></p>
+        <div id="slider-range"></div>
+    </center>
+{% endblock %}
+
+{% block timegran %}
+<select name="timegran" id="timegran" onchange="value_set_timegran()">
+    <option value="0">--Select Time Granulation--</option>
+    <option value="yearly">Yearly</option>
+    <option value="monthly">Monthly</option>
+    <option value="weekly">Weekly</option>
+    <option value="daily">Daily</option>
+    <option value="hourly">Hourly</option>
+</select>
+{% endblock %}
+
+{% block totInci %}
+    <h4 id="total_incid">{{ tot_inc }}</h4>
+{% endblock %}
+
+{% block arrest %}
+    <input type="checkbox" name="arrest" id="arrest" value="susarrest" onchange="value_set_arrest()">
+    <label for="arrest" class="check_lab">Suspect Arrested?</label><br>
+{% endblock %}
+
+{% block domestic %}
+    <input type="checkbox" name="domestic" id="domestic" value="domcrime" onchange="value_set_domestic()">
+    <label for="domestic" class="check_lab">Domestic Crime?</label><br>
+    <input type="submit" value="" id="filter_btn" name="filter_btn" onclick="addData()" style="display: none;">
+{% endblock %}
+
+<!---FILTERS END-->
+
+
+<!---QUERIES START-->
+
+{% block query1 %}
+    <div class="col-md-8 grid-margin stretch-card">
+        <div class="card">
+        <div class="card-body" id="query1_div">
+            <h4 class="card-title mb-0">No. of Incidents by Date</h4>
+            <canvas id="query1_gr"></canvas>
+        </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block query2 %}
+    <div class="col-md-4 grid-margin stretch-card">
+        <div class="card">
+        <div class="card-body d-flex flex-column">
+            <div class="wrapper">
+            <h4 class="card-title mb-0">Top 5 Crime Types</h4>
+            <canvas id="query2_gr"></canvas>
+            </div>
+        </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block query3 %}
+    <div class="col-md-6 grid-margin stretch-card">
+        <div class="card">
+        <div class="card-body">
+            <h4 class="card-title mb-0">No. of Crimes by District</h4>
+            <canvas id="query3_gr"></canvas>
+        </div>
+        </div>
+    </div>
+{% endblock %}
+    
+{% block query4 %}
+    <div class="col-md-6 grid-margin stretch-card">
+        <div class="card">
+        <div class="card-body d-flex flex-column">
+            <div class="wrapper">
+            <h4 class="card-title mb-0">Crimes by Day of Week</h4>
+            <canvas id="query4_gr"></canvas>
+            </div>
+        </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block query5 %}
+    <div class="col-md-6 grid-margin stretch-card">
+        <div class="card">
+        <div class="card-body d-flex flex-column">
+            <div class="wrapper">
+            <h4 class="card-title mb-0">Crimes by Time of Day</h4>
+            <canvas id="query5_gr"></canvas>
+            </div>
+        </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block query6 %}
+    <div class="col-md-6 grid-margin stretch-card">
+        <div class="card">
+        <div class="card-body d-flex flex-column">
+            <div class="wrapper">
+            <h4 class="card-title mb-0">Percentage Change from Previous Month</h4>
+            <canvas id="query6_gr"></canvas>
+            </div>
+        </div>
+        </div>
+    </div>
+{% endblock %}
+
+<!---QUERIES END-->
