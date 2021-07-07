@@ -1,2 +1,3 @@
-# Crime-Analytics-Dashboard
-A crime analytics dashboard with lots of different dynamic charts which updates automatically as new data is added to the database. Has features like multi-filter search. Developed using Flask (Python) and Oracle Database.
+# info-db-project-g13
+This repository is for making the project of Info and DB [Group-13].
+Project Title: Not Decided!
